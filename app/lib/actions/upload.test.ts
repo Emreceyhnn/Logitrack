@@ -322,7 +322,7 @@ describe("Upload Actions", () => {
     });
 
     it("should_ReturnUnsignedUrl_WhenPublicIdCannotBeParsed", async () => {
-      // Arrange — a legacy (pre-migration) Supabase URL has no /v<version>/ segment
+      // Arrange — a non-Cloudinary URL has no /v<version>/ segment
       dbMock.document.findFirst.mock.mockImplementation(async () => ({
         id: "doc-legacy",
       }));
@@ -330,7 +330,7 @@ describe("Upload Actions", () => {
       // Act
       const result = await uploadActions.getSignedUrlAction(
         mockUser,
-        "https://stcbrfzcftmdbpukxsxw.supabase.co/storage/v1/object/documents/old.pdf",
+        "https://example-storage.test/storage/v1/object/documents/old.pdf",
         "documents"
       );
 
