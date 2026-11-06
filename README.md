@@ -4,6 +4,16 @@
 
 Built with **Next.js 16 (App Router)**, **React 19**, **TypeScript**, **Prisma 7** on **Neon Postgres**, and **MUI 7**.
 
+🔗 **Live demo:** [logitrackenterprise.emreceyhan.xyz](https://logitrackenterprise.emreceyhan.xyz/en) — public, read-mostly walkthrough with sample data, no sign-up needed.
+
+![LogiTrack landing page](docs/screenshots/landing.jpg)
+
+![LogiTrack live demo overview](docs/screenshots/overview.jpg)
+*Live demo dashboard — shipments, fleet status, and action-required alerts at a glance.*
+
+![LogiTrack vehicle fleet management](docs/screenshots/fleet.jpg)
+*Vehicle fleet management — status, odometer, assigned driver, and fuel level per vehicle.*
+
 ---
 
 ## ✨ Features
