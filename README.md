@@ -77,14 +77,30 @@ app/
 
 API route errors are normalized through a central `handleApiError()` that maps `AppError` statuses to proper HTTP responses (403/404/409/429).
 
-### Dual validation stack
+## Technical decisions
 
-Client and server intentionally use **different** validation libraries to keep the browser bundle small (~350 kB saved):
-
-- **Client:** `Formik` + `Yup` — schemas in `app/lib/validationSchema/`. Never import Zod or `@prisma/client` here.
-- **Server:** `Zod` — schemas in `app/lib/validation/`, with full access to Prisma enums.
+**Why a dual validation stack (Formik+Yup client / Zod server) instead of one
+library everywhere?** Zod schemas with full Prisma enum access are the right
+tool server-side, but importing Zod (and transitively `@prisma/client`) into
+the client bundle would ship database types to the browser for no benefit —
+it cost ~350 kB and 0.7s of First Contentful Paint when tried. Keeping them
+separate trades a small drift risk (documented below) for a materially
+smaller, faster client bundle.
 
 > ⚠️ **Drift risk:** when a field constraint changes, update *both* the Yup and Zod schemas.
+
+**Why Firebase Realtime Database for live tracking instead of polling the
+Postgres API?** Polling every few seconds from 200+ concurrent vehicles would
+mean constant round-trips to Neon for data that's valid for only a moment.
+Firebase's realtime listeners push position updates to connected clients with
+no polling and no extra load on the primary database — Postgres stays the
+system of record, Firebase is purely the live transport.
+
+**Why an edge-level tenant guard instead of filtering by `companyId` in each
+query?** Relying on every controller to remember to scope by company is a
+single missed `where` clause away from a cross-tenant data leak. Enforcing it
+once in `tenant-context.ts`, ahead of any controller code, makes that class
+of bug structurally harder to introduce.
 
 ### Data model
 
