@@ -1,5 +1,11 @@
 # LogiTrack v2
 
+[![Next.js 16](https://img.shields.io/badge/Next.js-16-000000)](https://nextjs.org/)
+[![React 19](https://img.shields.io/badge/React-19-61DAFB)](https://react.dev/)
+[![Prisma 7](https://img.shields.io/badge/Prisma-7-2D3748)](https://www.prisma.io/)
+[![Postgres](https://img.shields.io/badge/PostgreSQL-Neon-4169E1)](https://neon.tech/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
 **LogiTrack** is a multi-tenant logistics and fleet management platform. It covers the full operational lifecycle of a logistics company — shipments, routes, drivers, vehicles, trailers, warehouses, inventory, customers, fuel tracking, maintenance, and analytics — behind a role-based, company-scoped access model.
 
 Built with **Next.js 16 (App Router)**, **React 19**, **TypeScript**, **Prisma 7** on **Neon Postgres**, and **MUI 7**.
